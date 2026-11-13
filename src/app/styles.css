@@ -750,6 +750,174 @@ footer .mono {
 .upgrade-dialog > small {
   font-size: 9px;
 }
+.upgrade-options button {
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+}
+.upgrade-options button.risk-card {
+  background: #1f1a16;
+  border-color: #7a5a38;
+}
+.upgrade-options button.risk-card:hover {
+  background: #35271a;
+  border-color: #f0b27a;
+}
+.upgrade-options button.safe-card .upgrade-symbol {
+  color: #c2f5ce;
+}
+.upgrade-options button.risk-card .upgrade-symbol {
+  color: #f0b27a;
+}
+.upgrade-options button:disabled {
+  opacity: 0.55;
+  cursor: default;
+  transform: none;
+}
+.preview-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 8px 0;
+}
+.preview-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 9.5px;
+  line-height: 1.5;
+}
+.preview-line svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.preview-line.benefit {
+  color: #8fdca0;
+}
+.preview-line.cost {
+  color: #f0a17a;
+}
+.preview-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #2c3a33;
+}
+.preview-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+}
+.preview-stat-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #8fa39a;
+}
+.preview-stat-value {
+  color: #9fb4ab;
+  white-space: nowrap;
+}
+.preview-stat-value i {
+  color: #55665f;
+  font-style: normal;
+}
+.preview-stat.stat-up .preview-stat-value b,
+.preview-stat.stat-up .preview-stat-label svg {
+  color: #8fdca0;
+}
+.preview-stat.stat-down .preview-stat-value b,
+.preview-stat.stat-down .preview-stat-label svg {
+  color: #f0a17a;
+}
+.elite-budget {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #26343d;
+}
+.elite-budget.depleted {
+  color: #e08c6e;
+}
+.elite-pips {
+  display: flex;
+  gap: 4px;
+  margin: 8px 0 4px;
+}
+.elite-pips i {
+  flex: 1;
+  height: 5px;
+  border-radius: 2px;
+  background: #2a333c;
+}
+.elite-pips i.active {
+  background: #c99af0;
+  box-shadow: 0 0 6px #a86fd666;
+}
+.armor-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 9px;
+  font-size: 10px;
+  color: #9fb4ab;
+}
+.armor-row .armor-penalty {
+  color: #f0a17a;
+}
+.cost-tag {
+  font-size: 9px;
+  color: #e08c6e;
+  border: 1px solid #5a3c2c;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+.build-mods {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #26343d;
+}
+.build-mods .stat-row {
+  margin-top: 9px;
+}
+.mod-benefit {
+  color: #8fdca0;
+}
+.mod-cost {
+  color: #f0a17a;
+}
+.risk-summary {
+  max-width: 460px;
+  margin: 0 auto 22px;
+  padding: 14px;
+  border: 1px solid #4a3722;
+  border-radius: 7px;
+  background: #1a1612;
+  text-align: left;
+}
+.risk-summary .eyebrow {
+  margin-bottom: 10px;
+  color: #d9a06c;
+}
+.risk-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10.5px;
+  color: #b7c5bd;
+  padding: 5px 0;
+  border-bottom: 1px solid #2c2620;
+  flex-wrap: wrap;
+}
+.risk-summary-row:last-child {
+  border-bottom: none;
+}
+.risk-summary-row .cost-text {
+  color: #e08c6e;
+}
 .result-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

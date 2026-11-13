@@ -1,12 +1,13 @@
 import type { GameDoc, Input } from "../../../shared/types";
 import { fire, nearestTarget } from "../lib/projectiles";
 import { WEAPON_CATALOG } from "./catalog";
+import { weaponDamageMultiplier } from "../../progression/model/risk";
 export function stepArsenal(doc: GameDoc, input: Input, dt: number): number {
   let shots = 0;
   const target = nearestTarget(doc),
     aim = input.firing ? input.aim : target || input.aim;
   const angle = Math.atan2(aim.y - doc.player.y, aim.x - doc.player.x);
-  const power = 1 + (doc.upgrades.power || 0) * 0.2,
+  const power = weaponDamageMultiplier(doc),
     haste = 1 + (doc.upgrades.haste || 0) * 0.13;
   for (const weapon of doc.weapons) {
     weapon.cooldown -= dt;

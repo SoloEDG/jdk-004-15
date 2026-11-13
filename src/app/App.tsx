@@ -187,7 +187,11 @@ export function App() {
                 </div>
               )}
               {d.phase === "upgrade" && (
-                <UpgradeDialog doc={d} choose={choose} />
+                <UpgradeDialog
+                  key={d.choiceRound}
+                  doc={d}
+                  choose={choose}
+                />
               )}{" "}
               {d.phase === "ended" && (
                 <ResultDialog doc={d} restart={restart} />

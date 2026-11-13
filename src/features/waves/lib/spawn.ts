@@ -2,12 +2,18 @@ import type { GameDoc, Enemy } from "../../../shared/types";
 import { WIDTH, HEIGHT } from "../../../shared/types";
 import { random } from "../../../shared/math";
 import { ENEMY_CATALOG } from "../model/catalog";
+import {
+  BASE_SHOOTER_RATE,
+  eliteSpawnRate,
+  eliteWaveThreshold,
+} from "../../progression/model/risk";
 export function spawnEnemy(doc: GameDoc): Enemy {
   const roll = random(doc);
+  const eliteRate = eliteSpawnRate(doc);
   const kind: Enemy["kind"] =
-    doc.wave >= 3 && roll < 0.08
+    doc.wave >= eliteWaveThreshold(doc) && roll < eliteRate
       ? "elite"
-      : doc.wave >= 2 && roll < 0.28
+      : doc.wave >= 2 && roll < BASE_SHOOTER_RATE
         ? "shooter"
         : "chaser";
   const data = ENEMY_CATALOG[kind],

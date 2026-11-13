@@ -77,4 +77,28 @@ export const UPGRADE_CATALOG: Upgrade[] = [
     category: "武器",
     max: 5,
   },
+  {
+    id: "overload",
+    name: "过载强化",
+    description: "全部武器伤害 +25%",
+    category: "风险",
+    max: 3,
+    risk: {
+      id: "overload",
+      benefit: "全部武器伤害 +25%（独立乘区）",
+      cost: "消耗 2 点精英预算，后续波次提早生成精英且精英出现率 +4%",
+    },
+  },
+  {
+    id: "growth",
+    name: "加速成长",
+    description: "拾取经验 +30%",
+    category: "风险",
+    max: 3,
+    risk: {
+      id: "growth",
+      benefit: "拾取经验 +30%（不改变地上晶体的数值）",
+      cost: "角色装甲 −1 级，所受伤害减免降低 12%",
+    },
+  },
 ];

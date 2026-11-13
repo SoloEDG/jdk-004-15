@@ -14,7 +14,7 @@ export function ExperienceBar({ doc }: { doc: GameDoc }) {
         />
       </div>
       <span className="mono">
-        {doc.xp} / {xpRequired(doc.level)} XP
+        {Math.floor(doc.xp)} / {xpRequired(doc.level)} XP
       </span>
     </div>
   );

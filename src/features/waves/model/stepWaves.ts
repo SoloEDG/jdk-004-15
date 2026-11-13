@@ -2,11 +2,17 @@ import type { GameDoc } from "../../../shared/types";
 import { distance, normalize } from "../../../shared/math";
 import { spawnEnemy } from "../lib/spawn";
 import { ENEMY_CATALOG, WAVE_DURATION, TOTAL_WAVES } from "./catalog";
+import {
+  ELITE_BUDGET_INITIAL,
+  grantEliteBudget,
+} from "../../progression/model/risk";
 export function stepWaves(doc: GameDoc, dt: number): void {
   if (doc.victory) return;
   if (doc.wave === 0) {
     doc.wave = 1;
     doc.spawnBudget = 1;
+    // 精英预算与普通敌潮生成预算相互独立
+    doc.eliteBudget = doc.eliteBudget ?? ELITE_BUDGET_INITIAL;
     doc.notice = "第 1 波 · 信号已连接";
   }
   doc.waveTime += dt;
@@ -18,6 +24,8 @@ export function stepWaves(doc: GameDoc, dt: number): void {
       return;
     }
     doc.wave++;
+    // 进入新波次时才补充精英预算；升级暂停不推进模拟步，不会提前获得预算
+    grantEliteBudget(doc);
     doc.notice = `第 ${doc.wave} 波 · 威胁升级`;
   }
   doc.spawnBudget += dt * (1.05 + doc.wave * 0.27);

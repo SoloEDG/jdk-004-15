@@ -39,12 +39,19 @@ export interface Weapon {
   level: number;
   cooldown: number;
 }
+export type RiskId = "overload" | "growth";
 export interface Upgrade {
   id: string;
   name: string;
   description: string;
   category: string;
   max: number;
+  /** 风险构筑专属：该强化携带的代价说明，普通升级缺省即为无代价 */
+  risk?: {
+    id: RiskId;
+    benefit: string;
+    cost: string;
+  };
 }
 export interface RunStats {
   kills: number;
@@ -84,6 +91,12 @@ export interface GameDoc {
   wave: number;
   waveTime: number;
   spawnBudget: number;
+  /** 精英预算：过载强化在提交时消耗，仅在波次推进时补充，预览/暂停不改动 */
+  eliteBudget: number;
+  /** 升级候选轮次令牌：每次刷新候选自增，同一轮内同一候选只允许提交一次 */
+  choiceRound: number;
+  /** 最近一次提交所在的轮次，用于拦截同候选快速双击 */
+  lastChosenRound: number;
   stats: RunStats;
   records: RunRecord[];
   notice: string;

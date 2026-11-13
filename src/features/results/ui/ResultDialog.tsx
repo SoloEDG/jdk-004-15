@@ -1,5 +1,14 @@
 import type { GameDoc } from "../../../shared/types";
 import { formatTime } from "../../../shared/math";
+import {
+  damageReduction,
+  eliteSpawnRate,
+  eliteWaveThreshold,
+  riskRank,
+  weaponDamageMultiplier,
+  xpMultiplier,
+} from "../../progression/model/risk";
+const pct = (v: number) => `${Math.round(v * 100)}%`;
 export function ResultDialog({
   doc,
   restart,
@@ -7,6 +16,8 @@ export function ResultDialog({
   doc: GameDoc;
   restart: () => void;
 }) {
+  const overload = riskRank(doc, "overload");
+  const growth = riskRank(doc, "growth");
   return (
     <div className="overlay">
       <div className="result-dialog">
@@ -37,6 +48,32 @@ export function ResultDialog({
             </div>
           ))}
         </div>
+        {overload + growth > 0 && (
+          <div className="risk-summary">
+            <div className="eyebrow">RISK BUILD · 风险构筑结算</div>
+            {overload > 0 && (
+              <div className="risk-summary-row">
+                <span>
+                  过载强化 ×{overload} · 火力 {pct(weaponDamageMultiplier(doc))}
+                </span>
+                <span className="cost-text">
+                  精英第 {eliteWaveThreshold(doc)} 波起 · 出现率{" "}
+                  {pct(eliteSpawnRate(doc))}
+                </span>
+              </div>
+            )}
+            {growth > 0 && (
+              <div className="risk-summary-row">
+                <span>
+                  加速成长 ×{growth} · 经验 {pct(xpMultiplier(doc))}
+                </span>
+                <span className="cost-text">
+                  减伤降至 {pct(damageReduction(doc))}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
         <button className="primary" onClick={restart}>
           重新接入 ↗
         </button>

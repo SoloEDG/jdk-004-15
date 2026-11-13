@@ -1,4 +1,5 @@
 import type { GameDoc, RunRecord } from "./types";
+import { ELITE_BUDGET_INITIAL } from "../features/progression/model/risk";
 export function createRun(seed = 204004, records: RunRecord[] = []): GameDoc {
   return {
     version: 1,
@@ -28,6 +29,9 @@ export function createRun(seed = 204004, records: RunRecord[] = []): GameDoc {
     wave: 0,
     waveTime: 0,
     spawnBudget: 0,
+    eliteBudget: ELITE_BUDGET_INITIAL,
+    choiceRound: 0,
+    lastChosenRound: 0,
     stats: {
       kills: 0,
       damage: 0,

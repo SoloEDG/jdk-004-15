@@ -1,5 +1,14 @@
 import type { GameDoc } from "../../../shared/types";
+import {
+  ELITE_BUDGET_MAX,
+  eliteSpawnRate,
+  eliteWaveThreshold,
+  getEliteBudget,
+  riskRank,
+} from "../../progression/model/risk";
 export function WavePanel({ doc }: { doc: GameDoc }) {
+  const eliteBudget = getEliteBudget(doc);
+  const overload = riskRank(doc, "overload");
   return (
     <section className="panel">
       <div className="section-caption">
@@ -29,6 +38,26 @@ export function WavePanel({ doc }: { doc: GameDoc }) {
       </div>
       <div className="bar">
         <i style={{ width: `${(doc.waveTime / 30) * 100}%` }} />
+      </div>
+      <div className={`elite-budget ${eliteBudget < 2 ? "depleted" : ""}`}>
+        <div className="section-caption">
+          <span>精英预算</span>
+          <span className="mono">
+            {eliteBudget} / {ELITE_BUDGET_MAX}
+          </span>
+        </div>
+        <div className="elite-pips">
+          {Array.from({ length: ELITE_BUDGET_MAX }, (_, i) => (
+            <i key={i} className={i < eliteBudget ? "active" : ""} />
+          ))}
+        </div>
+        <p className="tiny">
+          精英自第 {eliteWaveThreshold(doc)} 波出现，出现率{" "}
+          {Math.round(eliteSpawnRate(doc) * 100)}%
+          {overload > 0
+            ? ` · 过载 ×${overload} 已让精英提前来袭`
+            : " · 过载强化会在此预算中扣除并提早精英波次"}
+        </p>
       </div>
       <p className="tiny">每 30 秒进入新波次。撑过第八波，完成撤离。</p>
     </section>
